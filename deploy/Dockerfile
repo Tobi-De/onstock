@@ -44,11 +44,11 @@ FROM python-base as production
 
 COPY --from=builder-base /s6-install /
 COPY --from=builder-base $VENV_PATH $VENV_PATH
-COPY --from=builder-base /app/stockon/staticfiles /app/stockon/staticfiles
+COPY --from=builder-base /app/onstock/staticfiles /app/onstock/staticfiles
 COPY deploy/etc/s6-overlay  /etc/s6-overlay
-COPY stockon /app/stockon
+COPY onstock /app/onstock
 COPY manage.py /app/manage.py
-RUN rm -r /app/stockon/static/
+RUN rm -r /app/onstock/static/
 
 EXPOSE 8000
 ENTRYPOINT ["/init"]

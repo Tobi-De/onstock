@@ -8,17 +8,17 @@ import sentry_sdk
 from environs import Env
 from marshmallow.validate import Email
 from marshmallow.validate import OneOf
+from onstock.core.sentry import sentry_profiles_sampler
+from onstock.core.sentry import sentry_traces_sampler
 from sentry_sdk.integrations.django import DjangoIntegration
 from sentry_sdk.integrations.logging import LoggingIntegration
-from stockon.core.sentry import sentry_profiles_sampler
-from stockon.core.sentry import sentry_traces_sampler
 
 # 0. Setup
 # --------------------------------------------------------------------------------------------
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
-APPS_DIR = BASE_DIR / "stockon"
+APPS_DIR = BASE_DIR / "onstock"
 
 env = Env()
 env.read_env(Path(BASE_DIR, ".env").as_posix())
@@ -34,7 +34,7 @@ DEBUG = env.bool("DEBUG", default=False)
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*"] if DEBUG else ["localhost"], subcast=str)
 
-ASGI_APPLICATION = "stockon.asgi.application"
+ASGI_APPLICATION = "onstock.asgi.application"
 
 # https://grantjenks.com/docs/diskcache/tutorial.html#djangocache
 if "CACHE_LOCATION" in os.environ:
@@ -120,8 +120,8 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "stockon.core",
-    "stockon.users",
+    "onstock.core",
+    "onstock.users",
 ]
 
 if DEBUG:
@@ -168,7 +168,7 @@ LOGGING = {
             "handlers": ["stdout"],
             "level": env.log_level("DJANGO_LOG_LEVEL", default="INFO"),
         },
-        "stockon": {
+        "onstock": {
             "handlers": ["stdout"],
             "level": env.log_level("STOCKON_LOG_LEVEL", default="INFO"),
         },
@@ -208,7 +208,7 @@ if DEBUG:
         "debug_toolbar.middleware.DebugToolbarMiddleware",
     )
 
-ROOT_URLCONF = "stockon.urls"
+ROOT_URLCONF = "onstock.urls"
 
 SECRET_KEY = env.str("SECRET_KEY", default="django-insecure-xPbE-am0IWmA1Ed1ANgHfO6Vf4i6vUadCjKAVrcAVmg")
 
@@ -299,7 +299,7 @@ USE_I18N = False
 
 USE_TZ = True
 
-WSGI_APPLICATION = "stockon.wsgi.application"
+WSGI_APPLICATION = "onstock.wsgi.application"
 
 # 2. Django Contrib Settings
 # -----------------------------------------------------------------------------------------------
@@ -352,7 +352,7 @@ ACCOUNT_DEFAULT_HTTP_PROTOCOL = "http" if DEBUG else "https"
 
 ACCOUNT_EMAIL_REQUIRED = True
 
-ACCOUNT_FORMS = {"signup": "stockon.users.forms.UserSignupForm"}
+ACCOUNT_FORMS = {"signup": "onstock.users.forms.UserSignupForm"}
 
 ACCOUNT_LOGOUT_REDIRECT_URL = "account_login"
 
@@ -407,7 +407,7 @@ Q_CLUSTER = {
 }
 
 # django-litstream
-LITESTREAM = {"config_file": BASE_DIR / "litestream.yml", "path_prefix": "stockon"}
+LITESTREAM = {"config_file": BASE_DIR / "litestream.yml", "path_prefix": "onstock"}
 
 # sentry
 if (SENTRY_DSN := env.url("SENTRY_DSN", default=None)).scheme and not DEBUG:

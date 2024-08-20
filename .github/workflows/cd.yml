@@ -15,7 +15,7 @@ jobs:
       - uses: adamghill/build-docker-and-deploy-to-caprover@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          caprover-app-name: "stockon"
+          caprover-app-name: "onstock"
           caprover-server-url: ${{ secrets.CAPROVER_SERVER_URL }}
           caprover-app-token: ${{ secrets.CAPROVER_APP_TOKEN }}
           docker-file-name: deploy/Dockerfile
@@ -132,7 +132,7 @@ jobs:
       - name: Rename
         working-directory: ${{ github.workspace }}
         run: |-
-          mv dist/binary/stockon* dist/binary/stockon-${{ matrix.job.release_suffix }}
+          mv dist/binary/onstock* dist/binary/onstock-${{ matrix.job.release_suffix }}
 
       - name: Upload built binary package
         uses: actions/upload-artifact@v4

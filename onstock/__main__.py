@@ -3,7 +3,7 @@ def main() -> None:
     import sys
     from pathlib import Path
 
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "stockon.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "onstock.settings")
     current_path = Path(__file__).parent.parent.resolve()
     sys.path.append(str(current_path))
 
@@ -52,7 +52,7 @@ def run_granian(_) -> None:
 
     workers = multiprocessing.cpu_count() * 2 + 1
     granian.Granian(
-        "stockon.wsgi:application",
+        "onstock.wsgi:application",
         interface=Interfaces.WSGI,
         workers=workers,
         address="0.0.0.0",

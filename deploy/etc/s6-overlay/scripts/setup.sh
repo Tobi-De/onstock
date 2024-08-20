@@ -1,4 +1,4 @@
 #!/command/with-contenv sh
 
 cd /app
-python stockon/__main__.py setup
+python onstock/__main__.py setup

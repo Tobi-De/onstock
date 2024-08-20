@@ -1,4 +1,4 @@
 #!/command/with-contenv execlineb
 
 cd /app
-exec python stockon/__main__.py litestream replicate -exec "python stockon/__main__.py"
+exec python onstock/__main__.py litestream replicate -exec "python onstock/__main__.py"

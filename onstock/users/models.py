@@ -39,7 +39,7 @@ class UserManager(DjangoUserManager):
 
 class User(AbstractUser):
     """
-    Default custom user model for stockon.
+    Default custom user model for onstock.
     """
 
     first_name = None  # type: ignore

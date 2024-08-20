@@ -5,7 +5,7 @@ requires = [
 ]
 
 [project]
-name = "stockon"
+name = "onstock"
 version = "0.0.3"
 description = ""
 readme = "README.md"
@@ -24,10 +24,10 @@ dependencies = [
   "django-allauth",
   "django-anymail[amazon-ses]",
   "django-compressor",
+  "django-cotton",
   "django-extensions",
   "django-fastdev",
   "django-health-check",
-  "django-cotton",
   "django-htmx",
   "django-lifecycle",
   "django-litestream",
@@ -47,8 +47,7 @@ dependencies = [
   "whitenoise",
 ]
 
-[project.scripts]
-stockon = "stockon.__main__:main"
+scripts.onstock = "onstock.__main__:main"
 
 [tool.hatch.env]
 requires = [
@@ -113,26 +112,26 @@ lock-filename = "docs/requirements.txt"
 
 [tool.ruff]
 lint.extend-ignore = [ "EM101", "I001", "I002", "RUF012", "TID252", "TRY003" ]
-lint.extend-per-file-ignores."*/migrations/*" = [ "E501" ]
 lint.extend-per-file-ignores."*/__main__.py" = [ "S104" ]
+lint.extend-per-file-ignores."*/migrations/*" = [ "E501" ]
 lint.extend-per-file-ignores."deploy/*" = [ "INP001" ]
 lint.extend-per-file-ignores."docs/conf.py" = [ "A001", "INP001" ]
 lint.extend-per-file-ignores."tests/**/*" = [ "ARG001", "PLR2004", "S101", "TID252" ]
 
 [tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "stockon.settings"
+DJANGO_SETTINGS_MODULE = "onstock.settings"
 addopts = "--reuse-db -n auto"
 norecursedirs = ".* bin build dist *.egg htmlcov logs node_modules static templates venv"
 python_files = "tests.py test_*.py *_tests.py"
 
 [tool.coverage.run]
-source_pkgs = [ "stockon", "tests" ]
+source_pkgs = [ "onstock", "tests" ]
 branch = true
 parallel = true
 
 [tool.coverage.paths]
-stockon = [ "*/stockon/stockon" ]
-tests = [ "tests", "*/stockon/tests" ]
+onstock = [ "*/onstock/onstock" ]
+tests = [ "tests", "*/onstock/tests" ]
 
 [tool.coverage.report]
 exclude_lines = [ "no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:" ]
@@ -187,7 +186,7 @@ module = [
 ]
 
 [tool.django-stubs]
-django_settings_module = "stockon.settings"
+django_settings_module = "onstock.settings"
 
 [tool.djlint]
 custom_blocks = "partialdef"
@@ -209,7 +208,7 @@ indent_size = 2
 indent_size = 2
 
 [tool.falco]
-htmx = "stockon/static/vendors/htmx/htmx.min.js:2.0.2"
+htmx = "onstock/static/vendors/htmx/htmx.min.js:2.0.2"
 revision = "352c6282410acf1ed99e07b55f1a36474e671f3b"
 skip = [ "playground.ipynb", "README.md" ]
 blueprint = "https://github.com/Tobi-De/falco_blueprint_basic.git"
@@ -220,7 +219,7 @@ tailwind = "python manage.py tailwind watch"
 worker = "python manage.py qcluster"
 
 [tool.falco.crud]
-utils-path = "stockon/core"
+utils-path = "onstock/core"
 
 [tool.mypy_django_plugin]
 ignore_missing_model_attributes = true

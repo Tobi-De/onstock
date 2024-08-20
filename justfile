@@ -120,7 +120,7 @@ createsuperuser EMAIL="admin@localhost" PASSWORD="admin":
 
 # Generate admin code for a django app
 @admin APP:
-    just dj admin_generator {{ APP }} | tail -n +2 > stockon/{{ APP }}/admin.py
+    just dj admin_generator {{ APP }} | tail -n +2 > onstock/{{ APP }}/admin.py
 
 # ----------------------------------------------------------------------
 # DOCS
@@ -193,13 +193,13 @@ build-wheel:
 build-bin:
     #!/usr/bin/env sh
     current_version=$(hatch version)
-    wheel_path="${PWD}/dist/stockon-${current_version}-py3-none-any.whl"
+    wheel_path="${PWD}/dist/onstock-${current_version}-py3-none-any.whl"
     [ -f "$wheel_path" ] || { echo "Wheel file does not exist. Please build the wheel first using the 'buildwheel' recipe."; exit 1; }
     export PYAPP_UV_ENABLED="1"
     export PYAPP_PYTHON_VERSION="3.12"
     export PYAPP_FULL_ISOLATION="1"
     export PYAPP_EXPOSE_METADATA="1"
-    export PYAPP_PROJECT_NAME="stockon"
+    export PYAPP_PROJECT_NAME="onstock"
     export PYAPP_PROJECT_VERSION="${current_version}"
     export PYAPP_PROJECT_PATH="${wheel_path}"
     export PYAPP_DISTRIBUTION_EMBED="1"

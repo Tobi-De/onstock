@@ -19,13 +19,13 @@ sys.path.insert(0, os.path.abspath(".."))
 # -- Django setup -----------------------------------------------------------
 # This is required to import Django code in Sphinx using autodoc.
 
-os.environ["DJANGO_SETTINGS_MODULE"] = "stockon.settings"
+os.environ["DJANGO_SETTINGS_MODULE"] = "onstock.settings"
 django.setup()
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "stockon"
+project = "onstock"
 copyright = "2024, Tobi DEGNON"
 author = "Tobi DEGNON"
 release = "2024"
