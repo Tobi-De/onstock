@@ -122,6 +122,10 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "onstock.core",
     "onstock.users",
+    "onstock.products",
+    "onstock.suppliers",
+    "onstock.purchases",
+    "onstock.sales",
 ]
 
 if DEBUG:
@@ -143,7 +147,7 @@ if DEBUG:
         "10.0.2.2",
     ]
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "fr-fr"
 
 LOGGING = {
     "version": 1,
@@ -295,7 +299,7 @@ TEMPLATES = [
 
 TIME_ZONE = "UTC"
 
-USE_I18N = False
+USE_I18N = True
 
 USE_TZ = True
 
