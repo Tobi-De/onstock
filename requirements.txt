@@ -7,6 +7,7 @@
 # - django-allauth
 # - django-anymail[amazon-ses]
 # - django-compressor
+# - django-cotton
 # - django-extensions
 # - django-fastdev
 # - django-health-check
@@ -38,6 +39,8 @@ asgiref==3.8.1
     # via
     #   django
     #   django-htmx
+beautifulsoup4==4.12.3
+    # via django-cotton
 boto3==1.35.1
     # via
     #   hatch.envs.default
@@ -103,6 +106,8 @@ django-appconf==1.0.6
 django-cache-url==3.4.5
     # via environs
 django-compressor==4.5.1
+    # via hatch.envs.default
+django-cotton==0.9.26
     # via hatch.envs.default
 django-crispy-forms==2.3
     # via crispy-tailwind
@@ -194,6 +199,8 @@ shellingham==1.5.4
     # via django-typer
 six==1.16.0
     # via python-dateutil
+soupsieve==2.6
+    # via beautifulsoup4
 sqlparse==0.5.1
     # via django
 typer-slim==0.12.4

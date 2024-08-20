@@ -24,10 +24,19 @@
 
     {% endcompress css %}
     <script defer src="{% static 'vendors/htmx/htmx.min.js' %}"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     {% compress js %}
 
       {% block javascript %}
       {% endblock javascript %}
+
+      <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+      </script>
 
     {% endcompress js %}
   </head>

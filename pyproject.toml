@@ -27,6 +27,7 @@ dependencies = [
   "django-extensions",
   "django-fastdev",
   "django-health-check",
+  "django-cotton",
   "django-htmx",
   "django-lifecycle",
   "django-litestream",
