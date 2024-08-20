@@ -815,7 +815,7 @@ sentry-sdk==2.13.0
     # via
     #   -c requirements.txt
     #   hatch.envs.docs
-setuptools==72.2.0
+setuptools==73.0.0
     # via
     #   jupyterlab
     #   pip-tools
