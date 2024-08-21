@@ -106,6 +106,7 @@ THIRD_PARTY_APPS = [
     "django_cotton",
     "django_htmx",
     "django_tailwind_cli",
+    "django_simple_nav",
     "django_q",
     "django_q_registry",
     "django_litestream",
