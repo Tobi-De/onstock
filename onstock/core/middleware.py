@@ -1,11 +1,11 @@
-from django.shortcuts import redirect
+from collections.abc import Callable
 
+from django.shortcuts import redirect
 from onstock.core.types import HttpRequest
 
 
 class NextURLMiddleware:
-
-    def __init__(self, get_response: callable):
+    def __init__(self, get_response: Callable):
         self.get_response = get_response
 
     def __call__(self, request: HttpRequest):

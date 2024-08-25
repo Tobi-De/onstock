@@ -1,13 +1,14 @@
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 from django.template.response import TemplateResponse
-from django.views.decorators.http import require_http_methods, require_POST
-from django.urls import reverse
+from django.views.decorators.http import require_http_methods
+from onstock.core.types import AuthenticatedHttpRequest
+from onstock.core.utils import for_htmx
+from onstock.core.utils import paginate_queryset
 
-from onstock.core.types import HttpRequest, AuthenticatedHttpRequest
-from onstock.core.utils import for_htmx, paginate_queryset
-
-from .forms import PurchaseForm, ItemForm
+from .forms import ItemForm
+from .forms import PurchaseForm
 from .models import Purchase
 
 
@@ -41,11 +42,6 @@ def create(request: AuthenticatedHttpRequest):
         "purchases/create.html",
         context={"form": form, "item_form": item_form},
     )
-
-
-@require_POST
-def add_item(request: AuthenticatedHttpRequest):
-    pass
 
 
 def update(request: AuthenticatedHttpRequest, pk: int):

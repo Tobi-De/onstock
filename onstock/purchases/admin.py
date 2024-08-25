@@ -1,11 +1,14 @@
 from django.contrib import admin
 
-from .models import Purchase, Item
+from .models import Item
+from .models import Purchase
+
 
 class ItemInline(admin.TabularInline):
     model = Item
     min_num = 1
     extra = 1
+
 
 @admin.register(Purchase)
 class PurchaseAdmin(admin.ModelAdmin):

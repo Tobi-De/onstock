@@ -1,10 +1,11 @@
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from django.views.decorators.http import require_http_methods
-
 from onstock.core.types import HttpRequest
-from onstock.core.utils import for_htmx, paginate_queryset
+from onstock.core.utils import for_htmx
+from onstock.core.utils import paginate_queryset
 
 from .forms import SaleForm
 from .models import Sale

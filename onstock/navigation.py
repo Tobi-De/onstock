@@ -1,6 +1,6 @@
+from django.urls import reverse
 from django_simple_nav.nav import Nav
 from django_simple_nav.nav import NavItem
-from django.urls import reverse
 
 
 class MainNav(Nav):

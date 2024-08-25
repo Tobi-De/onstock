@@ -149,7 +149,7 @@ django-tailwind-cli==2.13.0
     # via hatch.envs.default
 django-template-partials==24.4
     # via hatch.envs.default
-django-typer==2.2.1
+django-typer==2.2.2
     # via django-tailwind-cli
 environs==11.0.0
     # via hatch.envs.default

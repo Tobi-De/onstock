@@ -1,3 +1,4 @@
+from collections.abc import Callable
 from functools import wraps
 
 from django.core.paginator import InvalidPage
@@ -7,7 +8,6 @@ from django.http import Http404
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _
-from django.urls import path
 
 from .types import HttpRequest
 
@@ -126,7 +126,7 @@ def _get_param_from_request(request, param):
     return None
 
 
-def decorate_urls(url_patterns: list[path], decorators: list[callable]) -> list[path]:
+def decorate_urls(url_patterns: list, decorators: list[Callable]) -> list:
     for entry in url_patterns:
         if hasattr(entry, "url_patterns"):
             decorate_urls(entry.url_patterns, decorators)

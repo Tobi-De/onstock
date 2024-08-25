@@ -1,13 +1,15 @@
 from django.db import models
 from django.db.models import Manager
+from django_lifecycle import AFTER_CREATE
+from django_lifecycle import AFTER_UPDATE
+from django_lifecycle import BEFORE_CREATE
+from django_lifecycle import hook
+from django_lifecycle import LifecycleModel
+from django_lifecycle.conditions import WhenFieldValueChangesTo
+from django_lifecycle.conditions import WhenFieldValueIs
+from django_lifecycle.conditions import WhenFieldValueWas
 from model_utils.models import TimeStampedModel
-from django_lifecycle import hook, AFTER_CREATE, LifecycleModel, AFTER_UPDATE, BEFORE_CREATE
 from onstock.products.models import Stock
-from django_lifecycle.conditions import (
-    WhenFieldValueIs,
-    WhenFieldValueWas,
-    WhenFieldValueChangesTo,
-)
 
 
 class Purchase(TimeStampedModel, LifecycleModel):
@@ -24,16 +26,10 @@ class Purchase(TimeStampedModel, LifecycleModel):
         verbose_name="Fournisseur",
         related_name="purchases",
     )
-    status = models.CharField(
-        max_length=10, choices=Status.choices, default=Status.RECEIVED
-    )
+    status = models.CharField(max_length=10, choices=Status.choices, default=Status.RECEIVED)
     total_cost = models.PositiveIntegerField(verbose_name="Coût total")
-    order_date = models.DateField(
-        verbose_name="Date de commande", blank=True, null=True
-    )
-    received_date = models.DateField(
-        verbose_name="Date de réception", null=True, blank=True
-    )
+    order_date = models.DateField(verbose_name="Date de commande", blank=True, null=True)
+    received_date = models.DateField(verbose_name="Date de réception", null=True, blank=True)
 
     class Meta:
         verbose_name = "Achat"
@@ -56,9 +52,7 @@ class Purchase(TimeStampedModel, LifecycleModel):
 
 
 class Item(TimeStampedModel, LifecycleModel):
-    purchase = models.ForeignKey(
-        Purchase, on_delete=models.CASCADE, verbose_name="Achat", related_name="items"
-    )
+    purchase = models.ForeignKey(Purchase, on_delete=models.CASCADE, verbose_name="Achat", related_name="items")
     product = models.ForeignKey(
         "products.Product",
         on_delete=models.CASCADE,

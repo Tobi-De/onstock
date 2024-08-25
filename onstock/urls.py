@@ -1,16 +1,17 @@
+from allauth.urls import urlpatterns as allauth_patterns
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.auth.decorators import login_not_required
-from django.urls import include, path, reverse, reverse_lazy
+from django.contrib.auth.decorators import login_not_required  # type: ignore
+from django.urls import include
+from django.urls import path
+from django.urls import reverse_lazy
 from django.views import defaults as default_views
-from django.views.generic import TemplateView, RedirectView
+from django.views.generic import RedirectView
+from django.views.generic import TemplateView
 from health_check.views import MainView
-from allauth.urls import urlpatterns as allauth_patterns
-from onstock.core.utils import decorate_urls
-
 from onstock.core import views as core_views
-from django.contrib import admin
+from onstock.core.utils import decorate_urls
 
 admin_header = "Administration de FATUM"
 admin.site.enable_nav_sidebar = False

@@ -1,5 +1,8 @@
 from django.db import models
-from django_lifecycle import LifecycleModel, AFTER_CREATE, hook, BEFORE_CREATE
+from django_lifecycle import AFTER_CREATE
+from django_lifecycle import BEFORE_CREATE
+from django_lifecycle import hook
+from django_lifecycle import LifecycleModel
 from model_utils.models import TimeStampedModel
 from onstock.products.models import Stock
 

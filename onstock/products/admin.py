@@ -1,12 +1,15 @@
 from django.contrib import admin
 
-from .models import Product, Stock
+from .models import Product
+from .models import Stock
+
 
 class StockInline(admin.StackedInline):
     model = Stock
     extra = 1
     min_num = 0
     max_num = 1
+
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):

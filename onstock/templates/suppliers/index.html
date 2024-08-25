@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% load partials %}
 
@@ -6,7 +6,7 @@
   <section class="flex justify-between">
     <h1 class="text-lg font-bold">Fournisseurs</h1>
     <a href="{% url 'suppliers:create' %}"
-       class="cursor-pointer py-2 px-4 bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white text-center text-base font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
+       class="py-2 px-4 text-base font-semibold text-center text-white bg-blue-600 rounded-lg cursor-pointer hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-200 focus:outline-none">
       Nouveau Fournisseur
     </a>
   </section>
@@ -15,17 +15,17 @@
     <div id="table">
       <div class="flex flex-col">
         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+          <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
             <div class="overflow-x-auto">
               <table class="min-w-full">
-                <thead class="border text-gray-700 uppercase bg-gray-100 text-sm">
+                <thead class="text-sm text-gray-700 uppercase bg-gray-100 border">
                   {% with th_class="text-sm font-medium text-gray-900 border-r px-6 py-4 text-left" %}
                     <tr>
                       <th scope="col" class="{{ th_class }}">ID</th>
                       <th scope="col" class="{{ th_class }}">Nom</th>
                       <th scope="col" class="{{ th_class }}">Contact</th>
                       <th scope="col" class="{{ th_class }}">Adresse</th>
-                       <th scope="col" class="{{ th_class }}">Date de création</th>
+                      <th scope="col" class="{{ th_class }}">Date de création</th>
                       <th scope="col">Actions</th>
                     </tr>
                   {% endwith %}
@@ -49,7 +49,7 @@
                              href="{% url 'suppliers:update' supplier.pk %}">
                             {% heroicon_outline "pencil-square" size="18" %}
                           </a>
-                          <a class="cursor-pointer text-red-600 hover:text-red-500"
+                          <a class="text-red-600 cursor-pointer hover:text-red-500"
                              hx-target="closest tr"
                              hx-swap="outerHTML"
                              hx-confirm="Are you sure you?"
@@ -68,7 +68,7 @@
       </div>
       {% if suppliers_page.paginator.num_pages > 1 %}
         <div class="flex justify-end py-4">
-          <ul class="flex index-reset border border-grey-light rounded"
+          <ul class="flex rounded border index-reset border-grey-light"
               hx-target="#table"
               hx-swap="outerHTML"
               hx-push-url="true">
@@ -99,7 +99,7 @@
                      hx-get="?page={{ suppliers_page.next_page_number }}">Next</a>
                 </li>
                 <li>
-                  <a class="cursor-pointer block px-3 py-2 hover:text-white hover:bg-blue-500"
+                  <a class="block py-2 px-3 cursor-pointer hover:text-white hover:bg-blue-500"
                      hx-get="?page={{ suppliers_page.paginator.num_pages }}">Last</a>
                 </li>
               {% endif %}

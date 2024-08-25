@@ -1,15 +1,14 @@
 from django import forms
-
-from .models import Purchase
-from onstock.suppliers.models import Supplier
 from onstock.products.models import Product
+from onstock.suppliers.models import Supplier
+
 from .models import Item
+from .models import Purchase
 
 
 class PurchaseForm(forms.ModelForm):
-    supplier = forms.ModelChoiceField(
-        queryset=Supplier.objects, initial=Supplier.objects.first, label="Fournisseur"
-    )
+    supplier = forms.ModelChoiceField(queryset=Supplier.objects, initial=Supplier.objects.first, label="Fournisseur")
+
     class Meta:
         model = Purchase
         fields = (
@@ -27,9 +26,8 @@ class PurchaseForm(forms.ModelForm):
 
 
 class ItemForm(forms.ModelForm):
-    product = forms.ModelChoiceField(
-        queryset=Product.objects, initial=Product.objects.first, label="Article"
-    )
+    product = forms.ModelChoiceField(queryset=Product.objects, initial=Product.objects.first, label="Article")
+
     class Meta:
-        model =  Item
+        model = Item
         fields = ("product", "quantity_ordered", "quantity_received", "unit_price", "total_cost")
