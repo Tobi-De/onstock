@@ -1,5 +1,7 @@
 from django.db import models
+from django_lifecycle import LifecycleModel, AFTER_CREATE, hook, BEFORE_CREATE
 from model_utils.models import TimeStampedModel
+from onstock.products.models import Stock
 
 
 class Sale(TimeStampedModel):
@@ -11,14 +13,14 @@ class Sale(TimeStampedModel):
         ordering = ["-created"]
 
 
-class Item(TimeStampedModel):
+class Item(TimeStampedModel, LifecycleModel):
     sale = models.ForeignKey(Sale, on_delete=models.CASCADE, verbose_name="Vente", related_name="items")
     product = models.ForeignKey(
         "products.Product", on_delete=models.CASCADE, verbose_name="Produit", related_name="sales"
     )
     quantity_sold = models.PositiveIntegerField(verbose_name="Quantité vendue")
-    unit_price = models.PositiveIntegerField(verbose_name="Prix unitaire")
-    total_price = models.PositiveIntegerField(verbose_name="Prix total")
+    unit_price = models.PositiveIntegerField(verbose_name="Prix unitaire", blank=True)
+    total_price = models.PositiveIntegerField(verbose_name="Prix total", blank=True)
 
     class Meta:
         verbose_name = "Article"
@@ -26,3 +28,16 @@ class Item(TimeStampedModel):
 
     def __str__(self):
         return f"{self.sale} - {self.product} - {self.quantity_sold} - {self.total_price}"
+
+    @hook(BEFORE_CREATE)
+    def calculate_total_price(self):
+        if not self.unit_price:
+            self.unit_price = self.product.price
+        if not self.total_price:
+            self.total_price = self.unit_price * self.quantity_sold
+
+    @hook(AFTER_CREATE)
+    def decrease_stock(self):
+        stock = Stock.objects.select_for_update().get(product=self.product)
+        stock.quantity = models.F("quantity") - self.quantity_sold
+        stock.save()

@@ -38,6 +38,7 @@ dependencies = [
   "django-storages[s3]",
   "django-tailwind-cli",
   "django-template-partials",
+  "dj-shop-cart==8.0.0a2",
   "environs[django]",
   "granian",
   "heroicons[django]",
@@ -72,6 +73,7 @@ artifacts = [
 python = [ "3.11", "3.12" ]
 
 [tool.hatch.envs.default]
+python = "3.11"
 type = "pip-compile"
 pip-compile-constraint = "default"
 pip-compile-installer = "uv"

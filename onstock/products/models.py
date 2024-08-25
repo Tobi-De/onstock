@@ -1,11 +1,12 @@
 from django.db import models
+from django_lifecycle import LifecycleModel, hook, AFTER_CREATE
 from model_utils.models import TimeStampedModel
 
 
-class Product(TimeStampedModel):
+class Product(TimeStampedModel, LifecycleModel):
     name = models.CharField(verbose_name="Nom", max_length=100, unique=True, db_index=True)
     description = models.TextField(verbose_name="Description", blank=True)
-    sku = models.CharField(verbose_name="SKU", max_length=50, unique=True, db_index=True, blank=True)
+    sku = models.CharField(verbose_name="SKU", max_length=50, unique=True, db_index=True, blank=True, null=True)
     price = models.PositiveSmallIntegerField(verbose_name="Prix")
 
     class Meta:
@@ -14,6 +15,10 @@ class Product(TimeStampedModel):
 
     def __str__(self):
         return self.name
+
+    @hook(AFTER_CREATE)
+    def create_stock(self):
+        Stock.objects.create(product=self, quantity=0, min_quantity=0)
 
 
 class Stock(TimeStampedModel):
@@ -29,3 +34,7 @@ class Stock(TimeStampedModel):
 
     def __str__(self):
         return f"{self.product} - {self.quantity}"
+
+    @classmethod
+    def restock(cls):
+        pass

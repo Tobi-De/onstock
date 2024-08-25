@@ -196,10 +196,12 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.auth.middleware.LoginRequiredMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
     "django_htmx.middleware.HtmxMiddleware",
+    "onstock.core.middleware.NextURLMiddleware",
     # should be last
     "django.middleware.cache.FetchFromCacheMiddleware",
 ]
@@ -393,7 +395,7 @@ CRISPY_TEMPLATE_PACK = "tailwind"
 
 # django-debug-toolbar
 DEBUG_TOOLBAR_CONFIG = {
-    "DISABLE_PANELS": ["debug_toolbar.panels.redirects.RedirectsPanel"],
+    # "DISABLE_PANELS": ["debug_toolbar.panels.redirects.RedirectsPanel"],
     "SHOW_TEMPLATE_CONTEXT": True,
     "SHOW_COLLAPSED": True,
     "UPDATE_ON_FETCH": True,

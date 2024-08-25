@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="flex justify-between">
+    <h1 class="text-lg font-bold">Vente - {{ sale }}</h1>
+    <a href="{% url 'sales:index' %}"
+       class="text-blue-600 hover:underline hover:text-blue-500">All Ventes</a>
+  </section>
+  <ul class="py-5">
+    <li>
+      <span class="font-bold">ID:</span> {{ sale.id }}
+    </li>
+    <li>
+      <span class="font-bold">créé:</span> {{ sale.created }}
+    </li>
+    <li>
+      <span class="font-bold">mise à jour:</span> {{ sale.modified }}
+    </li>
+    <li>
+      <span class="font-bold">Montant total:</span> {{ sale.total_amount }}
+    </li>
+  </ul>
+  <a class="py-2 px-4 bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white text-center text-base font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg"
+     href="{% url 'sales:update' sale.pk %}">Edit</a>
+{% endblock content %}

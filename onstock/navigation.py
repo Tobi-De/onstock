@@ -1,5 +1,6 @@
 from django_simple_nav.nav import Nav
 from django_simple_nav.nav import NavItem
+from django.urls import reverse
 
 
 class MainNav(Nav):
@@ -12,14 +13,22 @@ class MainNav(Nav):
         ),
         NavItem(
             title="Produits",
-            url="products",
+            url=reverse("products:index"),
             extra_context={"icon": "store"},
         ),
         NavItem(
             title="Ventes",
-            url="sales",
+            url=reverse("sales:index"),
             extra_context={"icon": "shopping_cart"},
         ),
-        NavItem(title="Achats", url="purchases", extra_context={"icon": "shopping_cart"}),
-        NavItem(title="Fournisseurs", url="suppliers", extra_context={"icon": "store"}),
+        NavItem(
+            title="Achats",
+            url=reverse("purchases:index"),
+            extra_context={"icon": "shopping_cart"},
+        ),
+        NavItem(
+            title="Fournisseurs",
+            url=reverse("suppliers:index"),
+            extra_context={"icon": "store"},
+        ),
     ]

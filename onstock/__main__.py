@@ -35,6 +35,7 @@ def run_setup(_):
         ]
     )
     execute_from_command_line(["manage", "migrate"])
+    execute_from_command_line(["manage", "create_groups"])
     execute_from_command_line(["manage", "setup_periodic_tasks"])
 
     with suppress(CommandError):
