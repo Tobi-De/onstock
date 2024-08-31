@@ -122,6 +122,12 @@ createsuperuser EMAIL="admin@localhost" PASSWORD="admin":
 @admin APP:
     just dj admin_generator {{ APP }} | tail -n +2 > onstock/{{ APP }}/admin.py
 
+# Collect static files
+@collectstatic:
+    just dj tailwind --skip-checks build
+    just dj collectstatic --no-input --skip-checks
+    just dj compress
+
 # ----------------------------------------------------------------------
 # DOCS
 # ----------------------------------------------------------------------
@@ -184,9 +190,7 @@ bumpver VERSION:
 build-wheel:
     #!/usr/bin/env sh
     export DEBUG="False"
-    just dj tailwind build
-    just dj collectstatic --no-input --skip-checks
-    just dj compress
+    just collectstatic
     hatch build
 
 # Build a binary distribution of the project using hatch / pyapp

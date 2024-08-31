@@ -22,7 +22,7 @@ dependencies = [
   "diskcache",
   "dj-shop-cart==8.0.0a2",
   "django[argon2]>=5.1",
-  "django-allauth",
+  "django-allauth[socialaccount]",
   "django-anymail[amazon-ses]",
   "django-compressor",
   "django-cotton",

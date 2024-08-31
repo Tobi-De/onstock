@@ -5,7 +5,7 @@
 # - crispy-tailwind
 # - diskcache
 # - dj-shop-cart==8.0.0a2
-# - django-allauth
+# - django-allauth[socialaccount]
 # - django-anymail[amazon-ses]
 # - django-compressor
 # - django-cotton
@@ -60,7 +60,9 @@ certifi==2024.7.4
     #   requests
     #   sentry-sdk
 cffi==1.17.0
-    # via argon2-cffi-bindings
+    # via
+    #   argon2-cffi-bindings
+    #   cryptography
 charset-normalizer==3.3.2
     # via requests
 click==8.1.7
@@ -70,6 +72,8 @@ click==8.1.7
     #   typer-slim
 crispy-tailwind==1.0.3
     # via hatch.envs.default
+cryptography==43.0.0
+    # via pyjwt
 diskcache==5.6.3
     # via hatch.envs.default
 dj-database-url==2.2.0
@@ -173,6 +177,8 @@ marshmallow==3.22.0
     # via environs
 mdurl==0.1.2
     # via markdown-it-py
+oauthlib==3.2.2
+    # via requests-oauthlib
 packaging==24.1
     # via marshmallow
 pillow==10.4.0
@@ -187,6 +193,8 @@ pycparser==2.22
     # via cffi
 pygments==2.18.0
     # via rich
+pyjwt==2.9.0
+    # via django-allauth
 python-dateutil==2.9.0.post0
     # via botocore
 python-dotenv==1.0.1
@@ -196,7 +204,12 @@ pyyaml==6.0.2
 rcssmin==1.1.2
     # via django-compressor
 requests==2.32.3
-    # via django-anymail
+    # via
+    #   django-allauth
+    #   django-anymail
+    #   requests-oauthlib
+requests-oauthlib==2.0.0
+    # via django-allauth
 rich==13.7.1
     # via django-litestream
 rjsmin==1.2.2
