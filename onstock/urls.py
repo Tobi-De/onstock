@@ -19,8 +19,8 @@ admin.site.site_header = admin_header
 admin.site.site_title = admin_header
 
 urlpatterns = [
-    # path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
-    path("", RedirectView.as_view(url=reverse_lazy("admin:index")), name="home"),
+    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
+    # path("", RedirectView.as_view(url=reverse_lazy("admin:index")), name="home"),
     path(
         "about/",
         TemplateView.as_view(template_name="pages/about.html"),

@@ -117,7 +117,8 @@ THIRD_PARTY_APPS = [
     "health_check.storage",
     "health_check.contrib.migrations",
     "heroicons",
-    "template_partials.apps.SimpleAppConfig",
+    # "template_partials.apps.SimpleAppConfig",
+    "template_partials",
 ]
 
 LOCAL_APPS = [
@@ -285,17 +286,17 @@ TEMPLATES = [
                 "django_cotton.templatetags.cotton",
             ],
             "debug": DEBUG,
-            # "loaders": [
-            #     (
-            #         "template_partials.loader.Loader",
-            #         DEFAULT_LOADERS if DEBUG else CACHED_LOADERS,
-            #     )
-            # ],
             "loaders": [
-                "django_cotton.cotton_loader.Loader",
-                "django.template.loaders.filesystem.Loader",
-                "django.template.loaders.app_directories.Loader",
+                (
+                    "template_partials.loader.Loader",
+                    DEFAULT_LOADERS if DEBUG else CACHED_LOADERS,
+                )
             ],
+            # "loaders": [
+            #     "django_cotton.cotton_loader.Loader",
+            #     "django.template.loaders.filesystem.Loader",
+            #     "django.template.loaders.app_directories.Loader",
+            # ],
         },
     },
 ]
