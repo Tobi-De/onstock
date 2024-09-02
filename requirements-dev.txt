@@ -363,7 +363,7 @@ execnet==2.1.1
     # via pytest-xdist
 executing==2.0.1
     # via stack-data
-falco-cli==0.23.4
+falco-cli==0.23.8
     # via hatch.envs.dev
 fastjsonschema==2.20.0
     # via nbformat
