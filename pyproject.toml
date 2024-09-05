@@ -27,7 +27,6 @@ dependencies = [
   "django-compressor",
   "django-cotton",
   "django-extensions",
-  "django-fastdev",
   "django-health-check",
   "django-htmx",
   "django-lifecycle",
@@ -39,12 +38,14 @@ dependencies = [
   "django-storages[s3]",
   "django-tailwind-cli",
   "django-template-partials",
+  "django-unique-user-email",
   "environs[django]",
   "granian",
   "heroicons[django]",
   "litestream-bin",
   "pillow",
   "psycopg[binary,pool]",
+  "refreshcss",
   "sentry-sdk",
   "whitenoise",
 ]
@@ -80,11 +81,14 @@ pip-compile-installer = "uv"
 pip-compile-resolver = "uv"
 lock-filename = "requirements.txt"
 
+scripts.onstock = "onstock.__main__:main"
+
 [tool.hatch.envs.dev]
 dependencies = [
   "django-browser-reload",
   "django-debug-toolbar",
   "dj-notebook>=0.6.1",
+  "django-fastdev",
   "Werkzeug[watchdog]>=3.0.1",
   "django-stubs[compatible-mypy]",
   "coverage[toml]>=6.5",
@@ -212,7 +216,7 @@ indent_size = 2
 
 [tool.falco]
 htmx = "onstock/static/vendors/htmx/htmx.min.js:2.0.2"
-revision = "352c6282410acf1ed99e07b55f1a36474e671f3b"
+revision = "b7d5a54720bd67c39d8b1af81b860c60a102d398"
 skip = [ "playground.ipynb", "README.md" ]
 blueprint = "https://github.com/Tobi-De/falco_blueprint_basic.git"
 

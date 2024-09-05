@@ -27,10 +27,6 @@ _default:
 @install:
     just run python --version
 
-# Install hatch
-@install-hatch:
-    curl -L https://tinyurl.com/install-hatch | bash -s $HOME/.local/bin
-
 # Generate and upgrade dependencies
 @upgrade:
     just run hatch-pip-compile --upgrade
@@ -94,6 +90,10 @@ coverage-report: test
 @server ADDRESS="":
     just falco work {{ ADDRESS }}
 
+# Kill the django development server in case the process is running in the background
+@kill-server PORT="8000":
+    lsof -i :{{ PORT }} -sTCP:LISTEN -t | xargs -t kill
+
 # Open a Django shell using django-extensions shell_plus command
 @shell:
     just dj shell_plus
@@ -116,7 +116,12 @@ alias su := createsuperuser
 
 # Quickly create a superuser with the provided credentials
 createsuperuser EMAIL="admin@localhost" PASSWORD="admin":
-    @export DJANGO_SUPERUSER_PASSWORD='{{ PASSWORD }}' && just dj createsuperuser --noinput --email "{{ EMAIL }}"
+    #!/usr/bin/env bash
+    set -euo pipefail
+    email="{{ EMAIL }}"
+    export DJANGO_SUPERUSER_PASSWORD='{{ PASSWORD }}'
+    export DJANGO_SUPERUSER_USERNAME="${email%%@*}"
+    just dj createsuperuser --noinput --email "{{ EMAIL }}"
 
 # Generate admin code for a django app
 @admin APP:
@@ -170,7 +175,8 @@ docs-upgrade:
 
 # Bump project version and update changelog
 bumpver VERSION:
-    #!/usr/bin/env sh
+    #!/usr/bin/env bash
+    set -euo pipefail
     just run bump-my-version bump {{ VERSION }}
     just run git-cliff --output CHANGELOG.md
 
@@ -188,14 +194,15 @@ bumpver VERSION:
 
 # Build a wheel distribution of the project using hatch
 build-wheel:
-    #!/usr/bin/env sh
+    #!/usr/bin/env bash
+    set -euo pipefail
     export DEBUG="False"
     just collectstatic
     hatch build
 
 # Build a binary distribution of the project using hatch / pyapp
 build-bin:
-    #!/usr/bin/env sh
+    #!/usr/bin/env bash
     current_version=$(hatch version)
     wheel_path="${PWD}/dist/onstock-${current_version}-py3-none-any.whl"
     [ -f "$wheel_path" ] || { echo "Wheel file does not exist. Please build the wheel first using the 'buildwheel' recipe."; exit 1; }
@@ -209,10 +216,21 @@ build-bin:
     export PYAPP_DISTRIBUTION_EMBED="1"
     hatch build -t binary
 
-# Build binary in docker
-build-bin-docker:
+# Build linux binary in docker
+build-linux-bin:
     mkdir dist || true
     docker build -t build-bin-container . -f deploy/Dockerfile.binary
     docker run -it -v "${PWD}:/app" -w /app --name final-build build-bin-container just build-wheel && just build-bin
     docker cp final-build:/app/dist .
     docker rm -f final-build
+
+# Build docker image
+build-docker-image:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    current_version=$(hatch version)
+    image_name="onstock"
+    just install
+    docker build -t "${image_name}:${current_version}" -f deploy/Dockerfile .
+    docker tag "${image_name}:${current_version}" "${image_name}:latest"
+    echo "Built docker image ${image_name}:${current_version}"

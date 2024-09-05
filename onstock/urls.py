@@ -20,6 +20,7 @@ admin.site.site_title = admin_header
 
 urlpatterns = [
     # path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
+    path("", include("onstock.core.urls")),
     path("", RedirectView.as_view(url=reverse_lazy("admin:index")), name="home"),
     path(
         "about/",

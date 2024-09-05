@@ -118,11 +118,11 @@ THIRD_PARTY_APPS = [
     "health_check.contrib.migrations",
     "heroicons",
     "template_partials.apps.SimpleAppConfig",
+    "unique_user_email",
 ]
 
 LOCAL_APPS = [
     "onstock.core",
-    "onstock.users",
     "onstock.products",
     "onstock.suppliers",
     "onstock.purchases",
@@ -334,8 +334,6 @@ AUTH_PASSWORD_VALIDATORS = [
 if DEBUG:
     AUTH_PASSWORD_VALIDATORS = []
 
-AUTH_USER_MODEL = "users.User"
-
 # django.contrib.staticfiles
 STATIC_ROOT = APPS_DIR / "staticfiles"
 
@@ -359,8 +357,6 @@ ACCOUNT_DEFAULT_HTTP_PROTOCOL = "http" if DEBUG else "https"
 
 ACCOUNT_EMAIL_REQUIRED = True
 
-ACCOUNT_FORMS = {"signup": "onstock.users.forms.UserSignupForm"}
-
 ACCOUNT_LOGOUT_REDIRECT_URL = "account_login"
 
 ACCOUNT_SESSION_REMEMBER = True
@@ -368,8 +364,6 @@ ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 
 ACCOUNT_UNIQUE_EMAIL = True
-
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 
 ACCOUNT_USERNAME_REQUIRED = False
 
@@ -387,6 +381,14 @@ if not DEBUG:
 
 # django-compressor
 COMPRESS_OFFLINE = not DEBUG
+COMPRESS_FILTERS = {
+    "css": [
+        "compressor.filters.css_default.CssAbsoluteFilter",
+        "compressor.filters.cssmin.rCSSMinFilter",
+        "refreshcss.filters.RefreshCSSFilter",
+    ],
+    "js": ["compressor.filters.jsmin.rJSMinFilter"],
+}
 
 # django-crispy-forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"

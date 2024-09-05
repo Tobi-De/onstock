@@ -10,7 +10,6 @@
 # - django-compressor
 # - django-cotton
 # - django-extensions
-# - django-fastdev
 # - django-health-check
 # - django-htmx
 # - django-lifecycle
@@ -22,6 +21,7 @@
 # - django-storages[s3]
 # - django-tailwind-cli
 # - django-template-partials
+# - django-unique-user-email
 # - django[argon2]>=5.1
 # - environs[django]
 # - granian
@@ -29,6 +29,7 @@
 # - litestream-bin
 # - pillow
 # - psycopg[binary,pool]
+# - refreshcss
 # - sentry-sdk
 # - whitenoise
 #
@@ -94,7 +95,6 @@ django==5.1
     #   django-compressor
     #   django-crispy-forms
     #   django-extensions
-    #   django-fastdev
     #   django-health-check
     #   django-htmx
     #   django-lifecycle
@@ -108,6 +108,7 @@ django==5.1
     #   django-tailwind-cli
     #   django-template-partials
     #   django-typer
+    #   django-unique-user-email
     #   heroicons
 django-allauth==64.1.0
     # via hatch.envs.default
@@ -124,8 +125,6 @@ django-cotton==0.9.32
 django-crispy-forms==2.3
     # via crispy-tailwind
 django-extensions==3.2.3
-    # via hatch.envs.default
-django-fastdev==1.9.0
     # via hatch.envs.default
 django-health-check==3.18.3
     # via hatch.envs.default
@@ -155,6 +154,8 @@ django-template-partials==24.4
     # via hatch.envs.default
 django-typer==2.2.2
     # via django-tailwind-cli
+django-unique-user-email==23.2
+    # via hatch.envs.default
 environs==11.0.0
     # via hatch.envs.default
 granian==1.5.2
@@ -203,6 +204,8 @@ pyyaml==6.0.2
     # via django-litestream
 rcssmin==1.1.2
     # via django-compressor
+refreshcss==0.5.1
+    # via hatch.envs.default
 requests==2.32.3
     # via
     #   django-allauth
