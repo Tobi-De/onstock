@@ -794,7 +794,7 @@ rfc3986-validator==0.1.1
     # via
     #   jsonschema
     #   jupyter-events
-rich==13.7.1
+rich==13.9.2
     # via
     #   -c requirements.txt
     #   bump-my-version

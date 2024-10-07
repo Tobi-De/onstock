@@ -213,7 +213,7 @@ requests==2.32.3
     #   requests-oauthlib
 requests-oauthlib==2.0.0
     # via django-allauth
-rich==13.7.1
+rich==13.9.2
     # via django-litestream
 rjsmin==1.2.2
     # via django-compressor
